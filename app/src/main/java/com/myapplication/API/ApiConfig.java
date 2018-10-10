@@ -7,9 +7,6 @@ import java.util.ArrayList;
 public class ApiConfig {
 
     // *************** URL ************
-    public static final String TYPE_SERVICE = "http://arianroid.com/OutPut/Services/Type";
-    public static final String GROUP_TYPE_SERVICE = "http://arianroid.com/OutPut/Services/GroupType";
-    public static final String WORDS_SERVICE = "http://arianroid.com/OutPut/Services/Words";
 
 
     // **************************** HEADER *****************************
