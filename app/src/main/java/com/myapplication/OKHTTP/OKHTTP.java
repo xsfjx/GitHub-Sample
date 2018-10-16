@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import com.myapplication.task.TaskHelper;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -135,15 +136,20 @@ public class OKHTTP {
 
     // ******************** Call  Functions ****************************
 
-    private static OKHTTPResponse callRequest(Request request) {
+    private static OKHTTPResponse callRequest(Request request){
         Response response = null;
         try {
             Call call = getClient().newCall(request);
             response = call.execute();
             return new OKHTTPResponse(response.code(), response.body().string());
         } catch (IOException e) {
-            return new OKHTTPResponse();
+            try {
+                return new OKHTTPResponse();
+            } catch (JSONException e1) {
+                e1.printStackTrace();
+            }
         }
+        return null;
     }
 
 
