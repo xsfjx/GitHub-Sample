@@ -1,4 +1,4 @@
-package com.myapplication;
+package com.githubsample;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -7,9 +7,9 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.myapplication.API.LastUpdateApi;
-import com.myapplication.DTO.MainDto;
-import com.myapplication.OKHTTP.OKHTTPResponse;
+import com.githubsample.API.LastUpdateApi;
+import com.githubsample.DTO.MainDto;
+import com.githubsample.OKHTTP.OKHTTPResponse;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {

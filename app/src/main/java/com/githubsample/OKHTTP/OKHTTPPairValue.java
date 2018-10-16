@@ -1,4 +1,4 @@
-package com.myapplication.OKHTTP;
+package com.githubsample.OKHTTP;
 
 public class OKHTTPPairValue {
 

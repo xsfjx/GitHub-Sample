@@ -1,8 +1,8 @@
-package com.myapplication.OKHTTP;
+package com.githubsample.OKHTTP;
 
 import android.os.AsyncTask;
 
-import com.myapplication.task.TaskHelper;
+import com.githubsample.task.TaskHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;

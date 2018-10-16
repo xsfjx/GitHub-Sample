@@ -1,6 +1,6 @@
-package com.myapplication.API;
+package com.githubsample.API;
 
-import com.myapplication.OKHTTP.OKHTTPPairValue;
+import com.githubsample.OKHTTP.OKHTTPPairValue;
 
 import java.util.ArrayList;
 

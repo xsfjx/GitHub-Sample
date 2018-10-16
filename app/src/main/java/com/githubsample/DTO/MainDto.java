@@ -1,4 +1,4 @@
-package com.myapplication.DTO;
+package com.githubsample.DTO;
 
 public class MainDto {
 
