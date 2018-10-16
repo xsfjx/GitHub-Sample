@@ -1,7 +1,10 @@
 package com.myapplication.OKHTTP;
 
+import com.myapplication.DTO.MainDto;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class OKHTTPResponse {
 
@@ -13,9 +16,11 @@ public class OKHTTPResponse {
     private String bodyString = "";
     private int statusCode;
     private boolean responseBodyIsJson;
+    private JSONObject jsonObject;
+    private static MainDto mainDto = new MainDto();
 
     // *********************** Constructor ***************************/
-    OKHTTPResponse() {
+    OKHTTPResponse() throws JSONException {
         this(UNKNOWN_CODE, "{}");
     }
 
@@ -23,10 +28,18 @@ public class OKHTTPResponse {
         this.statusCode = statusCode;
         try {
             this.bodyJsonArray = new JSONArray(body);
+            jsonObject = new JSONObject(body);
+            fillMainDto();
             responseBodyIsJson = true;
         } catch (JSONException e) {
             responseBodyIsJson = false;
             bodyString = body;
+            try {
+                jsonObject = new JSONObject(body);
+                fillMainDto();
+            } catch (JSONException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
@@ -60,7 +73,20 @@ public class OKHTTPResponse {
         return bodyJsonArray;
     }
 
+    public static MainDto getMainDto() {
+        return mainDto;
+    }
+
     // **************************  Methods  ********************************
+
+    private void fillMainDto() throws JSONException {
+        mainDto.setLogin(jsonObject.getString("login"));
+        mainDto.setAvatar_url(jsonObject.getString("avatar_url"));
+        mainDto.setName(jsonObject.getString("name"));
+        mainDto.setLocation(jsonObject.getString("location"));
+        mainDto.setBio(jsonObject.getString("bio"));
+    }
+
     public boolean isSuccess() {
         return getStatusCode() == 200 || getStatusCode() == 201;
     }
