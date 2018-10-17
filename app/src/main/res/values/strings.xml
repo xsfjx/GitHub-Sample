@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GitHub Sample</string>
+    <string name="pleaseWait">لطفا منتظر بمانید ...</string>
 </resources>
