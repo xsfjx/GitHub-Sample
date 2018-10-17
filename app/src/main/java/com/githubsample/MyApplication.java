@@ -10,7 +10,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Thread.setDefaultUncaughtExceptionHandler(new MyUncaughtExceptionHandler());
+        Thread.setDefaultUncaughtExceptionHandler(new MyUncaughtExceptionHandler(context));
         context = getApplicationContext();
     }
 }
