@@ -7,9 +7,9 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.githubsample.API.LastUpdateApi;
-import com.githubsample.DTO.MainDto;
-import com.githubsample.OKHTTP.OKHTTPResponse;
+import com.githubsample.tools.api.LastUpdateApi;
+import com.githubsample.tools.dto.MainDto;
+import com.githubsample.tools.okhttp.OKHTTPResponse;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {

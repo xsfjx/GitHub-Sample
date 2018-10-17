@@ -1,4 +1,4 @@
-package com.githubsample.OKHTTP;
+package com.githubsample.tools.okhttp;
 
 public interface OKHTTPRunnable {
 

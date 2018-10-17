@@ -1,8 +1,8 @@
-package com.githubsample.OKHTTP;
+package com.githubsample.tools.okhttp;
 
 import android.os.AsyncTask;
 
-import com.githubsample.task.TaskHelper;
+import com.githubsample.helper.task.TaskHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;

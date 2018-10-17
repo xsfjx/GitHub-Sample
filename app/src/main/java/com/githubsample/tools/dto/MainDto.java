@@ -1,4 +1,4 @@
-package com.githubsample.DTO;
+package com.githubsample.tools.dto;
 
 public class MainDto {
 

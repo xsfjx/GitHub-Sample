@@ -1,6 +1,6 @@
-package com.githubsample.OKHTTP;
+package com.githubsample.tools.okhttp;
 
-import com.githubsample.DTO.MainDto;
+import com.githubsample.tools.dto.MainDto;
 
 import org.json.JSONArray;
 import org.json.JSONException;

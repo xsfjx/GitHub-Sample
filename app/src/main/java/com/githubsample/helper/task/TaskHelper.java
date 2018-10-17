@@ -1,4 +1,4 @@
-package com.githubsample.task;
+package com.githubsample.helper.task;
 
 import android.annotation.TargetApi;
 import android.os.AsyncTask;

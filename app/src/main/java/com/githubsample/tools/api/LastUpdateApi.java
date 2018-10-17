@@ -1,6 +1,6 @@
-package com.githubsample.API;
+package com.githubsample.tools.api;
 
-import com.githubsample.OKHTTP.OKHTTPRunnable;
+import com.githubsample.tools.okhttp.OKHTTPRunnable;
 
 public class LastUpdateApi {
 
