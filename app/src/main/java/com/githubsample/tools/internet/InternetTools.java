@@ -1,0 +1,41 @@
+package com.githubsample.tools.internet;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
+
+import com.githubsample.MyApplication;
+
+public class InternetTools {
+    private static NetworkInfo networkInfo;
+
+    public static boolean isOnline() {
+        return getNetworkInfoState();
+    }
+
+    private static boolean getNetworkInfoState() {
+        boolean internetConnectionIsOn = false;
+        WifiManager wifiManager = (WifiManager) MyApplication.context.getSystemService(Context.WIFI_SERVICE);
+        if (wifiManager.isWifiEnabled()) {
+            internetConnectionIsOn = true;
+        }
+
+        ConnectivityManager cm = (ConnectivityManager) MyApplication.context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        networkInfo = cm.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+            internetConnectionIsOn = true;
+        }
+
+        return internetConnectionIsOn;
+    }
+
+    private  static NetworkInfo getNetworkInfo() {
+        ConnectivityManager cm = (ConnectivityManager) MyApplication.context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        networkInfo = cm.getActiveNetworkInfo();
+
+        return networkInfo;
+    }
+
+}
