@@ -1,4 +1,4 @@
-package com.githubsample.strings;
+package com.githubsample.helper.strings;
 
 import com.githubsample.MyApplication;
 
