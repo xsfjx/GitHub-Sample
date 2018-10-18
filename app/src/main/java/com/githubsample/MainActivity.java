@@ -2,6 +2,7 @@ package com.githubsample;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import com.githubsample.helper.messages.MessageHelper;
 import com.githubsample.tools.api.LastUpdateApi;
 import com.githubsample.tools.dto.MainDto;
 import com.githubsample.tools.okhttp.OKHTTPResponse;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -29,17 +31,13 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Bundle bundle = new Bundle();
         initActivity();
         showWaitingDialog();
-
         LastUpdateApi.getLastUpdate(response -> {
             Log.i("Log", "run: ");
             fillMainDto(response);
-            Picasso.get().load(mainDto.getAvatar_url()).into(imageView);
-            txtName.setText(mainDto.getName());
-            txtLogin.setText(mainDto.getLogin());
-            txtBio.setText(mainDto.getBio());
-            txtLocation.setText(mainDto.getLocation());
+            initImage();
             dismissWaitingDialog();
             MessageHelper.showMessage(this, "Data is loaded!");
         });
@@ -53,6 +51,14 @@ public class MainActivity extends BaseActivity {
         txtLogin = findViewById(R.id.txtLogin);
         txtBio = findViewById(R.id.txtBio);
         txtLocation = findViewById(R.id.txtLocation);
+    }
+
+    private void initImage() {
+        Picasso.get().load(mainDto.getAvatar_url()).into(imageView);
+        txtName.setText(mainDto.getName());
+        txtLogin.setText(mainDto.getLogin());
+        txtBio.setText(mainDto.getBio());
+        txtLocation.setText(mainDto.getLocation());
     }
 
     private MainDto fillMainDto(OKHTTPResponse response) {
