@@ -3,7 +3,7 @@ package com.githubsample.tools.sharedPref;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.githubsample.MyApplication;
+import com.githubsample.BusApplication;
 import com.githubsample.tools.Tags;
 
 public class SharedPref {
@@ -11,12 +11,12 @@ public class SharedPref {
     /****************************   TOOLS   *************************/
 
     private static SharedPreferences.Editor getEditor() {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(MyApplication.context);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(BusApplication.busContext);
         return pref.edit();
     }
 
     private static SharedPreferences getSharedPreferences() {
-        return PreferenceManager.getDefaultSharedPreferences(MyApplication.context);
+        return PreferenceManager.getDefaultSharedPreferences(BusApplication.busContext);
     }
 
     /****************************   GETTER/SETTER   *************************/

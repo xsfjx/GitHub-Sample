@@ -1,6 +1,6 @@
 package com.githubsample.helper.strings;
 
-import com.githubsample.MyApplication;
+import com.githubsample.BusApplication;
 
 public class StringsHelper {
 
@@ -40,7 +40,7 @@ public class StringsHelper {
     }
 
     public static String getString(int id) {
-        return MyApplication.context.getString(id);
+        return BusApplication.busContext.getString(id);
     }
 
 }
