@@ -2,13 +2,21 @@ package com.githubsample;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
-public class MyApplication extends Application {
+import com.google.firebase.analytics.FirebaseAnalytics;
+
+public class BusApplication extends Application {
 
     public static Context busContext;
     public static String dataDir, versionName;
     public static int versionCode;
+    private static FirebaseAnalytics mFirebaseAnalytics;
 
+    public static FirebaseAnalytics getmFirebaseAnalytics() {
+        return mFirebaseAnalytics;
+    }
 
     public static void getAppDataDir() {
         PackageManager m = BusApplication.busContext.getPackageManager();
@@ -39,49 +47,24 @@ public class MyApplication extends Application {
         return busContext.getPackageName();
     }
 
-
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(newBase);
-        MultiDex.install(this);
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
         busContext = getApplicationContext();
-        Thread.setDefaultUncaughtExceptionHandler(
-                new AdabaziUncaughtExceptionHandler(busContext));
+        Thread.setDefaultUncaughtExceptionHandler(new MyUncaughtExceptionHandler(busContext));
         getAppDataDir();
         getAppPackageInfo();
-        initGoogleAnalytics();
-        initOneSignal();
-        initTapsell();
-        Pushe.initialize(this,true);
-
+        initFirebaseAnalytics();
     }
 
-    private void initGoogleAnalytics() {
-        AnalyticsTrackers.initial(this);
-        AnalyticsTrackers.getInstance().getTracker();
+    private void initFirebaseAnalytics() {
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }
 
-    private void initOneSignal() {
-        OneSignal.startInit(this)
-                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                .unsubscribeWhenNotificationsAreDisabled(false)
-                .setNotificationReceivedHandler(new AdabaziNotificationReceivedHandler())
-                .init();
-    }
-
-
-    private void initTapsell() {
-        TapsellConfiguration config =
-                new TapsellConfiguration(BusApplication.busContext);
-        config.setDebugMode(false);
-        config.setPermissionHandlerMode(TapsellConfiguration.PERMISSION_HANDLER_AUTO);
-        Tapsell.initialize(BusApplication.busContext, "rmtpmgsaphnnnmfrlbhfnpnrqmbrmgdjtsitgshckjeiqkerljfllngtqbtrqodncfpdih");
-
-    }
 
 }
