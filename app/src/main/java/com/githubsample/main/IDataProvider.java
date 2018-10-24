@@ -1,11 +1,12 @@
 package com.githubsample.main;
 
+import android.graphics.Bitmap;
+
 import com.githubsample.tools.okhttp.OKHTTPResponse;
-import com.squareup.picasso.RequestCreator;
 
 interface IDataProvider {
 
-    void getGitHubProfile(OKHTTPResponse response);
+    void getGithubProfile(OKHTTPResponse response);
 
-    void getGitHubAvatar(RequestCreator creator);
+    void getGitHubAvatar(Bitmap bitmap);
 }

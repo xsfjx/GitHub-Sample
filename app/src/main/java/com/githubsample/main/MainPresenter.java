@@ -1,16 +1,14 @@
 package com.githubsample.main;
 
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.githubsample.tools.dto.MainDto;
 import com.githubsample.tools.okhttp.OKHTTPResponse;
-import com.squareup.picasso.RequestCreator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
 
 import static com.githubsample.tools.Tags.MY_PERMISSIONS_REQUEST_READ_CONTACTS;
 
@@ -28,28 +26,24 @@ class MainPresenter implements IDataProvider {
     void init(IMainView view) {
         this.view = view;
         this.model.init(this);
-
     }
 
     void viewIsReady() {
-
         view.showProgress();
         this.getGithubProfile();
-        view.closeProgress();
-        view.showMsg("Data is loaded!!!");
-
     }
 
     private void getGithubProfile() {
         model.getGitHubModel();
-        view.fillData(dto);
-        model.getGithubAvatar(dto.getAvatar_url());
     }
 
 
     @Override
-    public void getGitHubProfile(OKHTTPResponse response) {
+    public void getGithubProfile(OKHTTPResponse response) {
         jsonParserToDto(response);
+        view.fillData(dto);
+        model.getGithubAvatar(dto.getAvatar_url());
+
     }
 
     private void jsonParserToDto(OKHTTPResponse response) {
@@ -66,12 +60,10 @@ class MainPresenter implements IDataProvider {
     }
 
     @Override
-    public void getGitHubAvatar(RequestCreator creator) {
-        try {
-            view.setAvatarImageView(creator.get());
-        } catch (IOException e) {
-            view.showMsg("error in avatar img");
-        }
+    public void getGitHubAvatar(Bitmap bitmap) {
+        view.setAvatarImageView(bitmap);
+        view.closeProgress();
+        view.showMsg("Data is loaded!!!");
     }
 
     void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
