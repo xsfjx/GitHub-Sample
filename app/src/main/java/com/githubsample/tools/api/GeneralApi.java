@@ -54,7 +54,7 @@ public class GeneralApi {
     }
 
 
-    static <T> void getItemList(String url, OKHTTPRunnable runnable) {
+    public static <T> void getItemList(String url, OKHTTPRunnable runnable) {
         OKHTTP.getInBackground(url,
                 runnable,
                 ApiConfig.getHeaders());
