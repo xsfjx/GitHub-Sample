@@ -1,19 +1,18 @@
-package com.githubsample;
+package com.githubsample.main;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.githubsample.R;
 import com.githubsample.helper.base.BaseActivity;
 import com.githubsample.helper.messages.MessageHelper;
 import com.githubsample.helper.permission.PermissionHelper;
 import com.githubsample.tools.api.LastUpdateApi;
 import com.githubsample.tools.dto.MainDto;
 import com.githubsample.tools.okhttp.OKHTTPResponse;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -21,7 +20,7 @@ import org.json.JSONObject;
 
 import static com.githubsample.tools.Tags.MY_PERMISSIONS_REQUEST_READ_CONTACTS;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements IMainView {
 
     private ImageView imageView;
     private TextView txtName;
@@ -36,14 +35,13 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         PermissionHelper.getPermission(this);
         initActivity();
-//        showWaitingDialog();
-//        LastUpdateApi.getLastUpdate(response -> {
-//            Log.i("Log", "run: ");
-//            fillMainDto(response);
-//            initImage();
-//            dismissWaitingDialog();
-//            MessageHelper.showMessage(this, "Data is loaded!");
-//        });
+        LastUpdateApi.getLastUpdate(response -> {
+            Log.i("Log", "run: ");
+            fillMainDto(response);
+            initImage();
+            dismissWaitingDialog();
+            MessageHelper.showMessage(this, "Data is loaded!");
+        });
     }
 
     @Override
@@ -67,6 +65,7 @@ public class MainActivity extends BaseActivity {
             // permissions this app might request.
         }
     }
+
     private void initActivity() {
         mainDto = new MainDto();
         imageView = findViewById(R.id.imageView);
@@ -96,5 +95,20 @@ public class MainActivity extends BaseActivity {
             e.printStackTrace();
         }
         return mainDto;
+    }
+
+    @Override
+    public void showMsg(String msg) {
+        MessageHelper.showMessage(this, msg);
+    }
+
+    @Override
+    public void showProgress() {
+        showWaitingDialog();
+    }
+
+    @Override
+    public void closeProgress() {
+        dismissWaitingDialog();
     }
 }
