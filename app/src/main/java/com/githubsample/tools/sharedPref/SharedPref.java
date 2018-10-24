@@ -3,7 +3,7 @@ package com.githubsample.tools.sharedPref;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.githubsample.BusApplication;
+import com.githubsample.helper.base.BusApplication;
 import com.githubsample.tools.Tags;
 
 public class SharedPref {

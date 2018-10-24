@@ -1,10 +1,11 @@
-package com.githubsample;
+package com.githubsample.helper.base;
 
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import com.githubsample.tools.exceptionHandler.MyUncaughtExceptionHandler;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class BusApplication extends Application {

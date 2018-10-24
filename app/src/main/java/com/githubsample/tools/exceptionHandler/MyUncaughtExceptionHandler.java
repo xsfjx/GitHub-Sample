@@ -1,4 +1,4 @@
-package com.githubsample;
+package com.githubsample.tools.exceptionHandler;
 
 import android.content.Context;
 import android.util.Log;

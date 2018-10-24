@@ -5,7 +5,7 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.Window;
 
-import com.githubsample.MyUncaughtExceptionHandler;
+import com.githubsample.tools.exceptionHandler.MyUncaughtExceptionHandler;
 import com.githubsample.R;
 
 public class CustomProgressDialog extends ProgressDialog {
