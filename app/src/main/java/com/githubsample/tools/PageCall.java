@@ -3,7 +3,7 @@ package com.githubsample.tools;
 import android.content.Context;
 import android.content.Intent;
 
-import com.githubsample.MainActivity;
+import com.githubsample.main.MainActivity;
 
 public class PageCall {
 
