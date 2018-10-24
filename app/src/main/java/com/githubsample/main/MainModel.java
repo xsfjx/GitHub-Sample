@@ -18,7 +18,7 @@ class MainModel {
     }
 
     void getGithubAvatar(String url) {
-        Picasso.get().load(url);
+        dataProvider.getGitHubAvatar(Picasso.get().load(url));
     }
 
 }
