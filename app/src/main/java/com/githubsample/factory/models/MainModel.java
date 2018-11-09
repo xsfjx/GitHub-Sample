@@ -8,21 +8,21 @@ import com.githubsample.tools.api.github.GitHubApi;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
-class MainModel {
+public class MainModel {
 
     private IDataProvider dataProvider;
 
-    void init(IDataProvider dataProvider) {
+    public void init(IDataProvider dataProvider) {
         this.dataProvider = dataProvider;
     }
 
-    void getGitHubModel() {
+    public void getGitHubModel() {
         GitHubApi.getProfile(response -> {
             dataProvider.getGithubProfile(response);
         });
     }
 
-    void getGithubAvatar(String url) {
+    public void getGithubAvatar(String url) {
         Picasso.get().load(url).into(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
