@@ -5,7 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 
-import com.githubsample.helper.base.BusApplication;
+import com.githubsample.factory.BusApplication;
 
 public class InternetTools {
     private static NetworkInfo networkInfo;

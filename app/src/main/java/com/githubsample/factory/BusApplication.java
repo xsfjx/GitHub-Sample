@@ -1,4 +1,4 @@
-package com.githubsample.helper.base;
+package com.githubsample.factory;
 
 import android.app.Application;
 import android.content.Context;

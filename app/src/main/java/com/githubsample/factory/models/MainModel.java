@@ -1,8 +1,9 @@
-package com.githubsample.main;
+package com.githubsample.factory.models;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
+import com.githubsample.factory.interfaces.IDataProvider;
 import com.githubsample.tools.api.github.GitHubApi;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;

@@ -1,6 +1,6 @@
 package com.githubsample.helper.strings;
 
-import com.githubsample.helper.base.BusApplication;
+import com.githubsample.factory.BusApplication;
 
 public class StringsHelper {
 

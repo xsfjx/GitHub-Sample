@@ -1,10 +1,10 @@
-package com.githubsample.main;
+package com.githubsample.factory.interfaces;
 
 import android.graphics.Bitmap;
 
 import com.githubsample.tools.okhttp.OKHTTPResponse;
 
-interface IDataProvider {
+public interface IDataProvider {
 
     void getGithubProfile(OKHTTPResponse response);
 

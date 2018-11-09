@@ -4,6 +4,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import com.githubsample.factory.IDataProvider;
+import com.githubsample.factory.models.MainModel;
 import com.githubsample.tools.dto.MainDto;
 import com.githubsample.tools.okhttp.OKHTTPResponse;
 
