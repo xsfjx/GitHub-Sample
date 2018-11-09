@@ -1,10 +1,10 @@
 package com.githubsample.helper.base;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -64,7 +64,7 @@ public class BaseActivity extends AppCompatActivity {
         activityPaused();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     protected void initActionbar(int titleId) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setSubtitle("");
