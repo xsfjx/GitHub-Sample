@@ -4,7 +4,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.githubsample.factory.interfaces.IDataProvider;
+import com.githubsample.factory.ModelFactory;
+import com.githubsample.factory.interfaces.AsyncWorkerListener;
+import com.githubsample.factory.interfaces.IGithubDataProvider;
 import com.githubsample.factory.models.MainModel;
 import com.githubsample.tools.dto.MainDto;
 import com.githubsample.tools.okhttp.OKHTTPResponse;
@@ -14,7 +16,10 @@ import org.json.JSONObject;
 
 import static com.githubsample.tools.Tags.MY_PERMISSIONS_REQUEST_READ_CONTACTS;
 
-class MainPresenter implements IDataProvider {
+class MainPresenter {
+
+    private IGithubDataProvider modelProvider;
+    private GithubAsyncListener listener;
 
     private IMainView view;
     private MainDto dto;
@@ -26,27 +31,21 @@ class MainPresenter implements IDataProvider {
     }
 
     void init(IMainView view) {
+        listener = new GithubAsyncListener();
+
         this.view = view;
-        this.model.init(this);
+//        this.model.init(this);
     }
 
     void viewIsReady() {
-        view.showProgress();
-        this.getGithubProfile();
+        modelProvider = ModelFactory.getInstance().createGithubDataProvider();
+        modelProvider.getGithubProfile(listener);
+//        this.getGithubProfile();
     }
 
-    private void getGithubProfile() {
-        model.getGitHubModel();
-    }
-
-
-    @Override
-    public void getGithubProfile(OKHTTPResponse response) {
-        jsonParserToDto(response);
-        view.fillData(dto);
-        model.getGithubAvatar(dto.getAvatar_url());
-
-    }
+//    private void getGithubProfile() {
+//        model.getGitHubModel();
+//    }
 
     private void jsonParserToDto(OKHTTPResponse response) {
         try {
@@ -61,7 +60,6 @@ class MainPresenter implements IDataProvider {
         }
     }
 
-    @Override
     public void getGitHubAvatar(Bitmap bitmap) {
         view.setAvatarImageView(bitmap);
         view.closeProgress();
@@ -90,6 +88,33 @@ class MainPresenter implements IDataProvider {
 
     }
 
-    void viewIsGone() {
+    void viewIsGone() { }
+
+    private class GithubAsyncListener implements AsyncWorkerListener{
+        @Override
+        public void onStart() {
+            view.showProgress();
+        }
+
+        @Override
+        public void onComplete(OKHTTPResponse response) {
+            jsonParserToDto(response);
+            view.fillData(dto);
+            view.showMsg("DATA LOADED!!!");
+//            model.getGithubAvatar(dto.getAvatar_url());
+        }
+
+        @Override
+        public void onFinished() {
+            view.closeProgress();
+        }
+
+        @Override
+        public void onException(String exceptionMsg) {
+            view.closeProgress();
+            view.showMsg(exceptionMsg);
+        }
+
+
     }
 }
