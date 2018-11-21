@@ -75,6 +75,9 @@ public class OKHTTPResponse {
     }
 
     public boolean isBodyHasValue() {
+        if(responseBodyIsJson){
+            return !bodyJsonArray.toString().isEmpty() || bodyJsonArray.toString().length() != 2;
+        }else
         return !bodyString.isEmpty() || bodyString.length() != 0;
     }
 
@@ -113,8 +116,8 @@ public class OKHTTPResponse {
         return responseBodyIsJson;
     }
 
-    /*public String getErrorMessage() {
-        if (!bodyIsSuccess()) {
+    public String getErrorMessage() {
+        if (!isSuccess()) {
             try {
                 return getBody().getString("errorMessage");
             } catch (JSONException e) {
@@ -123,7 +126,7 @@ public class OKHTTPResponse {
             }
         }
         return "";
-    }*/
+    }
 
 
 }
