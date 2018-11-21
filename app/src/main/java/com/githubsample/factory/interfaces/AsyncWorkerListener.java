@@ -1,10 +1,9 @@
 package com.githubsample.factory.interfaces;
 
-import com.githubsample.tools.okhttp.OKHTTPResponse;
+public interface AsyncWorkerListener<E> {
 
-public interface AsyncWorkerListener {
     void onStart();
-    void onComplete(OKHTTPResponse response);
+    void onComplete(E e);
     void onFinished();
     void onException(String exceptionMsg);
 }
