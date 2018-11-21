@@ -8,6 +8,7 @@ import com.githubsample.factory.ModelFactory;
 import com.githubsample.factory.interfaces.AsyncWorkerListener;
 import com.githubsample.factory.interfaces.IGithubDataProvider;
 import com.githubsample.tools.dto.MainDto;
+import com.githubsample.tools.enums.TypeEnum;
 import com.githubsample.tools.okhttp.OKHTTPResponse;
 
 import org.json.JSONException;
@@ -23,6 +24,7 @@ class MainPresenter {
 
     private IMainView view;
     private MainDto dto;
+    private TypeEnum typeEnum;
 
     MainPresenter() {
         dto = new MainDto();
@@ -31,12 +33,21 @@ class MainPresenter {
     void init(IMainView view) {
         listener = new GithubAsyncListener();
         avatarListener = new GithubAvatarAsyncListener();
+        typeEnum = TypeEnum.status;
         this.view = view;
     }
 
     void viewIsReady() {
         modelProvider = ModelFactory.getInstance().createGithubDataProvider();
         modelProvider.getGithubProfileData(listener);
+        switch (typeEnum) {
+            case status:
+                break;
+            case gallery:
+                break;
+            case pinCode:
+                break;
+        }
     }
 
     private void jsonParserToDto(OKHTTPResponse response) {
