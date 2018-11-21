@@ -1,32 +1,20 @@
 package com.githubsample.factory;
 
-import com.githubsample.factory.interfaces.IDataProvider;
-import com.githubsample.factory.models.MainModel;
+import com.githubsample.factory.interfaces.IGithubDataProvider;
 
 public abstract class AbstractDataBus {
 
-    private IDataProvider dataProviderLover;
-    private MainModel model;
+    private IGithubDataProvider dataProviderLover;
 
-    AbstractDataBus() {
-        model = new MainModel();
+    public AbstractDataBus() {
     }
 
-    void init(IDataProvider dataProviderLover) {
+    void init(IGithubDataProvider dataProviderLover) {
         add(dataProviderLover);
-        model.init(dataProviderLover);
     }
 
-    public void add(IDataProvider lover) {
+    public void add(IGithubDataProvider lover) {
         this.dataProviderLover = lover;
-    }
-
-    void onGitHubProfileDataIsReady() {
-        model.getGitHubModel();
-    }
-
-    void onGitHubAvatarIsReady(String url) {
-        model.getGithubAvatar(url);
     }
 
     protected abstract void restart();
