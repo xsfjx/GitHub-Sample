@@ -3,7 +3,7 @@ package com.githubsample.factory;
 import android.content.Context;
 
 import com.githubsample.factory.interfaces.IGithubDataProvider;
-import com.githubsample.factory.models.realModel.RealGithubDataProvider;
+import com.githubsample.factory.real.RealGithubDataProvider;
 
 public class ModelFactory {
 
