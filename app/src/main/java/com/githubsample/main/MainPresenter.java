@@ -7,7 +7,6 @@ import android.util.Log;
 import com.githubsample.factory.ModelFactory;
 import com.githubsample.factory.interfaces.AsyncWorkerListener;
 import com.githubsample.factory.interfaces.IGithubDataProvider;
-import com.githubsample.factory.models.MainModel;
 import com.githubsample.tools.dto.MainDto;
 import com.githubsample.tools.okhttp.OKHTTPResponse;
 
@@ -20,32 +19,25 @@ class MainPresenter {
 
     private IGithubDataProvider modelProvider;
     private GithubAsyncListener listener;
+    private GithubAvatarAsyncListener avatarListener;
 
     private IMainView view;
     private MainDto dto;
-    private MainModel model;
 
     MainPresenter() {
         dto = new MainDto();
-        model = new MainModel();
     }
 
     void init(IMainView view) {
         listener = new GithubAsyncListener();
-
+        avatarListener = new GithubAvatarAsyncListener();
         this.view = view;
-//        this.model.init(this);
     }
 
     void viewIsReady() {
         modelProvider = ModelFactory.getInstance().createGithubDataProvider();
-        modelProvider.getGithubProfile(listener);
-//        this.getGithubProfile();
+        modelProvider.getGithubProfileData(listener);
     }
-
-//    private void getGithubProfile() {
-//        model.getGitHubModel();
-//    }
 
     private void jsonParserToDto(OKHTTPResponse response) {
         try {
@@ -58,12 +50,6 @@ class MainPresenter {
         } catch (JSONException e) {
             view.showMsg("error in json ");
         }
-    }
-
-    public void getGitHubAvatar(Bitmap bitmap) {
-        view.setAvatarImageView(bitmap);
-        view.closeProgress();
-        view.showMsg("Data is loaded!!!");
     }
 
     void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -90,7 +76,7 @@ class MainPresenter {
 
     void viewIsGone() { }
 
-    private class GithubAsyncListener implements AsyncWorkerListener{
+    private class GithubAsyncListener implements AsyncWorkerListener<OKHTTPResponse> {
         @Override
         public void onStart() {
             view.showProgress();
@@ -100,13 +86,36 @@ class MainPresenter {
         public void onComplete(OKHTTPResponse response) {
             jsonParserToDto(response);
             view.fillData(dto);
+            modelProvider.getGithubProfileAvatar(avatarListener, dto.getAvatar_url());
             view.showMsg("DATA LOADED!!!");
-//            model.getGithubAvatar(dto.getAvatar_url());
         }
 
         @Override
         public void onFinished() {
             view.closeProgress();
+        }
+
+        @Override
+        public void onException(String exceptionMsg) {
+            view.closeProgress();
+            view.showMsg(exceptionMsg);
+        }
+
+
+    }
+
+    private class GithubAvatarAsyncListener implements AsyncWorkerListener<Bitmap> {
+        @Override
+        public void onStart() {
+        }
+
+        @Override
+        public void onComplete(Bitmap bitmap) {
+            view.setAvatarImageView(bitmap);
+        }
+
+        @Override
+        public void onFinished() {
         }
 
         @Override
