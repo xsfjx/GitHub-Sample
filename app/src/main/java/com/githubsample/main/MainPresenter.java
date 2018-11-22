@@ -8,7 +8,7 @@ import com.githubsample.factory.ModelFactory;
 import com.githubsample.factory.interfaces.AsyncWorkerListener;
 import com.githubsample.factory.interfaces.IGithubDataProvider;
 import com.githubsample.helper.jsonParser.JsonParser;
-import com.githubsample.tools.dto.MainDto;
+import com.githubsample.tools.dto.GithubDto;
 import com.githubsample.tools.enums.TypeEnum;
 import com.githubsample.tools.okhttp.OKHTTPResponse;
 
@@ -23,12 +23,12 @@ class MainPresenter {
     private GithubAvatarAsyncListener avatarListener;
 
     private IMainView view;
-    private MainDto dto;
+    private GithubDto dto;
     private TypeEnum typeEnum;
     private JsonParser jsonParser;
 
     MainPresenter() {
-        dto = new MainDto();
+        dto = new GithubDto();
         jsonParser = new JsonParser();
     }
 
@@ -95,7 +95,7 @@ class MainPresenter {
             jsonParserToDto(response);
             view.fillData(dto);
             modelProvider.getGithubProfileAvatar(avatarListener, dto.getAvatar_url());
-            view.showMsg("DATA LOADED!!!");
+            view.showMsg("Data Loaded!!!");
         }
 
         @Override

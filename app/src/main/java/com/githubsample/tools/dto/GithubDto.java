@@ -1,6 +1,6 @@
 package com.githubsample.tools.dto;
 
-public class MainDto {
+public class GithubDto {
 
     private String login;
     private String avatar_url;
@@ -8,7 +8,7 @@ public class MainDto {
     private String location;
     private String bio;
 
-    public MainDto() {
+    public GithubDto() {
         login = "";
         avatar_url = "";
         name = "";

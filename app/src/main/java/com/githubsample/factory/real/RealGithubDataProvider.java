@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
 
 import com.githubsample.factory.interfaces.AsyncWorkerListener;
 import com.githubsample.factory.interfaces.IGithubDataProvider;
-import com.githubsample.tools.api.github.GitHubApi;
+import com.githubsample.tools.api.github.GithubApi;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -21,7 +21,7 @@ public class RealGithubDataProvider implements IGithubDataProvider {
     @Override
     public void getGithubProfileData(final AsyncWorkerListener listener) {
         listener.onStart();
-        GitHubApi.getProfile(response -> {
+        GithubApi.getProfile(response -> {
             if (response.isServiceUnavailable()) {
                 listener.onFinished();
                 listener.onException(response.getErrorMessage());

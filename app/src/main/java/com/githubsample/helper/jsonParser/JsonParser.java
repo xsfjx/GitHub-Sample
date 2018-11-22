@@ -1,6 +1,6 @@
 package com.githubsample.helper.jsonParser;
 
-import com.githubsample.tools.dto.MainDto;
+import com.githubsample.tools.dto.GithubDto;
 import com.githubsample.tools.okhttp.OKHTTPResponse;
 
 import org.json.JSONException;
@@ -8,13 +8,13 @@ import org.json.JSONObject;
 
 public class JsonParser {
 
-    private MainDto dto;
+    private GithubDto dto;
 
     public JsonParser() {
-        dto = new MainDto();
+        dto = new GithubDto();
     }
 
-    public MainDto parse(OKHTTPResponse response) throws JSONException {
+    public GithubDto parse(OKHTTPResponse response) throws JSONException {
         JSONObject jsonObject = new JSONObject(response.getBody().toString());
         //Set Strings On JSON Base
         dto.setLogin(jsonObject.getString("login"));

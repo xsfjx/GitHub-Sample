@@ -9,7 +9,7 @@ import com.githubsample.R;
 import com.githubsample.helper.base.BaseActivity;
 import com.githubsample.helper.messages.MessageHelper;
 import com.githubsample.helper.permission.PermissionHelper;
-import com.githubsample.tools.dto.MainDto;
+import com.githubsample.tools.dto.GithubDto;
 
 public class MainActivity extends BaseActivity implements IMainView {
 
@@ -73,7 +73,7 @@ public class MainActivity extends BaseActivity implements IMainView {
     }
 
     @Override
-    public void fillData(MainDto dto) {
+    public void fillData(GithubDto dto) {
         txtName.setText(dto.getName());
         txtLogin.setText(dto.getLogin());
         txtBio.setText(dto.getBio());
