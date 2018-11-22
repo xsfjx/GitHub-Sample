@@ -7,12 +7,12 @@ import android.util.Log;
 import com.githubsample.factory.ModelFactory;
 import com.githubsample.factory.interfaces.AsyncWorkerListener;
 import com.githubsample.factory.interfaces.IGithubDataProvider;
+import com.githubsample.helper.jsonParser.JsonParser;
 import com.githubsample.tools.dto.MainDto;
 import com.githubsample.tools.enums.TypeEnum;
 import com.githubsample.tools.okhttp.OKHTTPResponse;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import static com.githubsample.tools.Tags.MY_PERMISSIONS_REQUEST_READ_CONTACTS;
 
@@ -25,9 +25,11 @@ class MainPresenter {
     private IMainView view;
     private MainDto dto;
     private TypeEnum typeEnum;
+    private JsonParser jsonParser;
 
     MainPresenter() {
         dto = new MainDto();
+        jsonParser = new JsonParser();
     }
 
     void init(IMainView view) {
@@ -52,12 +54,7 @@ class MainPresenter {
 
     private void jsonParserToDto(OKHTTPResponse response) {
         try {
-            JSONObject jsonObject = new JSONObject(response.getBody().toString());
-            dto.setLogin(jsonObject.getString("login"));
-            dto.setAvatar_url(jsonObject.getString("avatar_url"));
-            dto.setName(jsonObject.getString("name"));
-            dto.setLocation(jsonObject.getString("location"));
-            dto.setBio(jsonObject.getString("bio"));
+            dto = jsonParser.parse(response);
         } catch (JSONException e) {
             view.showMsg("error in json ");
         }
