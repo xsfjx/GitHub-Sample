@@ -121,7 +121,6 @@ public class OKHTTPResponse {
             try {
                 return getBody().getString("errorMessage");
             } catch (JSONException e) {
-                // TODO: 1/9/2018 improve
                 return "لطفا کمی بعد مجددا تلاش کنید";
             }
         }

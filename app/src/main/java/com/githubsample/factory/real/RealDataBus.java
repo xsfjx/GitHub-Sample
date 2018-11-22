@@ -1,8 +1,11 @@
 package com.githubsample.factory.real;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.githubsample.factory.AbstractDataBus;
+import com.githubsample.factory.interfaces.AsyncWorkerListener;
+import com.githubsample.factory.interfaces.IGithubDataProvider;
 
 public class RealDataBus extends AbstractDataBus {
 
@@ -13,7 +16,7 @@ public class RealDataBus extends AbstractDataBus {
         super();
     }
 
-    public RealDataBus getInstance() {
+    public static RealDataBus getInstance() {
         if (instance == null) {
             synchronized (lockObj) {
                 instance = new RealDataBus();
@@ -22,13 +25,24 @@ public class RealDataBus extends AbstractDataBus {
         return instance;
     }
 
-//    public void initail (Context context) {
-//        add(this);
-//    }
+    public void initail(Context context) {
+        add(new IGithubDataProvider() {
+            @Override
+            public void getGithubProfileData(AsyncWorkerListener listener) {
+
+            }
+
+            @Override
+            public void getGithubProfileAvatar(AsyncWorkerListener<Bitmap> listener, String url) {
+
+            }
+        });
+    }
 
 
     @Override
     protected void restart(){
-        // TODO: 11/9/2018
+        instance = null;
+        instance = getInstance();
     }
 }

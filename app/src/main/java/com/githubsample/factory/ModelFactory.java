@@ -3,6 +3,7 @@ package com.githubsample.factory;
 import android.content.Context;
 
 import com.githubsample.factory.interfaces.IGithubDataProvider;
+import com.githubsample.factory.real.RealDataBus;
 import com.githubsample.factory.real.RealGithubDataProvider;
 
 public class ModelFactory {
@@ -35,8 +36,7 @@ public class ModelFactory {
 
     public AbstractDataBus createDataBus(){
         if (bus == null){
-            //bus = RealDataBus().getInstance();
-            // TODO: 11/9/2018
+            bus = RealDataBus.getInstance();
         }
         return null;
     }
